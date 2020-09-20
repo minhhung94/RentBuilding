@@ -1,0 +1,423 @@
+<div class="col-md-5 mt-5">
+  <div class="input-group">
+    <input type="text" class="form-control search-input" placeholder="Tìm kiếm thông tin khách hàng" [ngModel]="search">
+    <button type="button" class="btn btn-secondary search-button"><strong><i
+      class="fa fa-search text-danger"></i></strong></button>
+  </div>
+</div>
+
+<!--Hung them-->
+<div class="row col-md-12 mt-5">
+  <div class="col-md-10">
+    <form [formGroup]="searchForm">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <div>
+            <label class="col-md-4" style="padding: 0">Tên khách hàng:</label>
+            <label class="col-md-6" style="padding: 0">
+              <input type="text" class="form-control search-input" placeholder="Tên khách hàng" formControlName="searchName">
+            </label>
+          </div>
+          <div>
+            <label class="col-md-4" style="padding: 0"></label>
+            <label class="col-md-6" style="padding: 0">
+              <p class=" text-danger" role="alert" *ngIf="searchForm.get('searchName').hasError('pattern')
+                  && searchForm.get('searchName').valueChanges">Tên phải là chữ và không có ký tự đặc biệt!!!
+              </p>
+              <p class=" text-danger" role="alert" *ngIf="searchForm.get('searchName').hasError('maxlength')
+                  && searchForm.get('searchName').valueChanges">Tên chỉ tối đa 150 ký tự!!!
+              </p>
+            </label>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div>
+            <label class="col-md-4" style="padding: 0">CMND :</label>
+            <label class="col-md-8" style="padding: 0">
+              <input type="text" class="form-control search-input" placeholder="Số chứng minh nhân dân" formControlName="searchIdCard" min="0">
+            </label>
+          </div>
+          <div>
+            <label class="col-md-4" style="padding: 0"></label>
+            <label class="col-md-8" style="padding: 0">
+              <p class=" text-danger" role="alert" *ngIf="searchForm.get('searchIdCard').hasError('pattern')
+                  && searchForm.get('searchIdCard').valueChanges">CMND phải là số và không có ký tự đặc biệt!!!
+              </p>
+              <p class="atext-danger" role="alert" *ngIf="searchForm.get('searchIdCard').hasError('max')
+              && searchForm.get('searchIdCard').touched"> CMND tối đa 10 số.
+              </p>
+            </label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-secondary search-button" (click)="onSearch(0)">
+      <i class="fa fa-search text-danger"></i>
+    </button>
+    <button (click)="resetForm()" class="btn btn-secondary search-button" style="margin-left: 10px"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+  </div>
+</div>
+<!--Het-->
+
+<div>
+  <div *ngIf="customers.length == 0" style="color: red; text-align: center; font-size: 22px"> Không tìm thấy kết quả phù hợp !</div>
+  <div style="width: 100%;background: #435D7D">
+<h3 class="text-light text-center py-3 mt-5" style="font-family: Varela Round ">DANH SÁCH KHÁCH HÀNG</h3>
+    <button  class="btn btn-success px-2 py-2 mb-1" (click)="openDialogAdd()">Thêm mới</button>
+  <span><button class="btn btn-danger  px-2 py-2 ml-1 mb-1 py-2 px-2" (click)="deleteAll()">Xoá tất cả</button></span>
+  </div>
+  <ng-container>
+  <form action="" [formGroup]="formEditCustomer" (ngSubmit)="logValue()" *ngIf="formEditCustomer">
+
+    <table class="table bg-light text-center table-bordered table-striped">
+
+      <thead class="thead-dark">
+      <tr class="text-muted">
+        <!--        <th>STT</th>-->
+        <th>Họ Tên (<span style="color: red">*</span>)</th>
+        <th>CMND (<span style="color: red">*</span>)</th>
+        <th>Email (<span style="color: red">*</span>)</th>
+        <th>Số Điện Thoại (<span style="color: red">*</span>)</th>
+        <th>Ngày Sinh</th>
+        <th>Địa Chỉ (<span style="color: red">*</span>)</th>
+        <th>Website</th>
+        <th>Công Ty (<span style="color: red">*</span>)</th>
+        <th>Mặt Bằng</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr
+        *ngFor="let customer of customers |filter : search ">
+        <input type="text" hidden value="{{customer.id}}" formControlName="id">
+        <!--        <td> {{(i + 1) + (page - 1) * 5}}</td>-->
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.name}}</td>
+        <td *ngIf="checkEdit  && customer.id===flag ">
+          <input type="text" class="form-control" formControlName="name">
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('name').invalid && formEditCustomer.get('name').touched">
+            Tên không được để trống!
+          </p>
+        </td>
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.idCard}}</td>
+        <td *ngIf="checkEdit && customer.id===flag ">
+          <input type="text"
+                 class="form-control"
+                 formControlName="idCard"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('idCard').invalid && formEditCustomer.get('idCard').touched">
+            CMND không được để trống!
+          </p>
+        </td>
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.email}}</td>
+        <td *ngIf="checkEdit && customer.id===flag ">
+          <input type="text"
+                 class="form-control"
+                 formControlName="email"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('email').invalid && formEditCustomer.get('email').touched">
+            Emailkhông được để trống!
+          </p>
+
+        </td>
+
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.phone}}</td>
+        <td *ngIf="checkEdit && customer.id===flag ">
+          <input type="text"
+                 class="form-control"
+                 formControlName="phone"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('phone').invalid && formEditCustomer.get('phone').touched">
+            Phone không được để trống!
+          </p>
+        </td>
+
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.birthday | date:'dd/MM/yyyy'}}</td>
+        <td *ngIf="checkEdit && customer.id===flag">
+
+          <input readonly style="float: right" class="form-control infoPlaceholder1" formControlName="birthday" placeholder="Choose a date" matInput
+                 [matDatepicker]="picker1">
+
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year" [startAt]="startDate"></mat-datepicker>
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('birthday').invalid && formEditCustomer.get('birthday').touched">
+            Ngày sinh không được để trống!
+          </p>
+        </td>
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.address}}</td>
+        <td *ngIf="checkEdit && customer.id===flag">
+          <input type="text"
+                 class="form-control"
+                 formControlName="address"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('address').invalid && formEditCustomer.get('address').touched">
+            Địa chỉ không được để trống!
+          </p>
+        </td>
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.website}}</td>
+        <td *ngIf="checkEdit && customer.id===flag">
+          <input type="text" class="form-control"
+                 formControlName="website"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('website').invalid && formEditCustomer.get('website').touched">
+            Tên website không được để trống!
+          </p>
+        </td>
+
+        <td *ngIf="!checkEdit || customer.id!==flag">{{customer.nameCompany}}</td>
+        <td *ngIf="checkEdit && customer.id===flag">
+          <input type="text" class="form-control"
+                 formControlName="nameCompany"
+          >
+          <p class="alert alert-danger" role="alert"
+             *ngIf="formEditCustomer.get('nameCompany').invalid && formEditCustomer.get('nameCompany').touched">
+            Tên công ty không được để trống!
+          </p>
+        </td>
+
+
+        <td>
+          <!--          <ng-container *ngFor="let contract of contracts">-->
+          <!--            <p *ngIf="contract.customer.id == customer.id">{{contract.ground.codeGround}}</p>-->
+
+          <!--          </ng-container>-->
+          <button class="btn btn-primary" (click)="openDialogDetailGround(customer.id)">Chi tiết</button>
+        </td>
+
+        <!--        <td>-->
+        <!--          <ng-container *ngFor="let contract of contracts">-->
+        <!--            <p><input *ngIf="contract.customer.id == customer.id" type="checkbox" [checked]="contract.statusContract"-->
+        <!--                      disabled></p>-->
+
+        <!--          </ng-container>-->
+        <!--        </td>-->
+
+        <td>
+          <button class="btn btn-dark" (click)="openServicesCustomer(customer.id)">Xem dịch vụ</button>
+        </td>
+
+        <td>
+          <button *ngIf="!checkEdit|| customer.id!==flag" class="btn btn-warning ml-3"
+                  (click)="checkEditCustomer(customer.id)">Sửa
+          </button>
+          <button *ngIf="checkEdit && customer.id===flag" class="btn btn-success ml-3" type="button"
+                  (click)="editCustomer()">Lưu
+          </button>
+
+        </td>
+
+        <td>
+          <button *ngIf="!checkEdit|| customer.id!==flag" class="btn btn-danger ml-3"
+                  (click)="openDialogDelete(customer.id)">Xóa
+          </button>
+          <button *ngIf="checkEdit && customer.id===flag" class="btn btn-secondary ml-3"
+                  type="button"
+                  (click)="resetCustomer()">Làm lại
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+</ng-container>
+
+<!--      add customer-->
+
+<ng-container *ngIf="checkAdd">
+  <form action="" [formGroup]="formAddNewCustomer" (ngSubmit)="logValue()" *ngIf="formAddNewCustomer">
+    <table>
+      <tbody class="border" formArrayName="customer"
+             *ngFor="let customer of customerControls; let i = index;">
+      <tr [formGroupName]="i">
+        <!--    <tr *ngIf="checkAdd" style="border-top: 5px solid slateblue">-->
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('name').errors && customer.get('name').touched }" type="text" class="form-control infoPlaceholder" formControlName="name"
+                 placeholder="Nhập tên khách hàng ">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.name.errors?.required && formAddNewCustomer.controls.name.touched"-->
+          <!--            class="text-danger">Vui lòng nhập tên !!!-->
+          <!--          </p>-->
+
+        </td>
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('idCard').errors && customer.get('idCard').touched }" type="text" class="form-control infoPlaceholder" formControlName="idCard" placeholder="Nhập CMND ">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.idCard.errors?.required && formAddNewCustomer.controls.idCard.touched"-->
+          <!--            class="text-danger">Vui lòng nhập CMND!!!</p>-->
+
+        </td>
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('email').errors && customer.get('email').touched }" type="text" class="form-control infoPlaceholder" formControlName="email" placeholder="Nhập email">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.email.errors?.required && formAddNewCustomer.controls.email.touched"-->
+          <!--            class="text-danger">Vui lòng nhập email!!!</p>-->
+
+        </td>
+        <td>
+          <input  [ngClass]="{'red-border-class': customer.get('phone').errors && customer.get('phone').touched }" type="text" class="form-control infoPlaceholder" formControlName="phone" placeholder="Nhập phone">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.phone.errors?.required && formAddNewCustomer.controls.phone.touched"-->
+          <!--            class="text-danger">Vui lòng nhập phone!!!</p>-->
+
+        </td>
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('birthday').errors && customer.get('birthday').touched }" style="float: right" class="form-control infoPlaceholder infoPlaceholder1" formControlName="birthday" placeholder="Nhập ngày sinh" matInput
+                 [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 startView="year" [startAt]="startDate"></mat-datepicker>
+
+        </td>
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('address').errors && customer.get('address').touched }" type="text" class="form-control infoPlaceholder" formControlName="address" placeholder="Nhập địa chỉ ">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.address.errors?.required && formAddNewCustomer.controls.address.touched"-->
+          <!--            class="text-danger">Vui lòng nhập address!!!</p>-->
+
+        </td>
+        <td class="add-row">
+          <input [ngClass]="{'red-border-class': customer.get('website').errors && customer.get('website').touched }" type="text" class="form-control infoPlaceholder" formControlName="website" placeholder="Tên Website">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.website.errors?.required && formAddNewCustomer.controls.website.touched"-->
+          <!--            class="text-danger">Vui lòng nhập website!!!</p>-->
+
+        </td>
+        <td class="add-row">
+          <input  [ngClass]="{'red-border-class': customer.get('nameCompany').errors && customer.get('nameCompany').touched }" type="text" class="form-control infoPlaceholder" formControlName="nameCompany"
+                 placeholder="Tên công ty">
+          <!--          <p-->
+          <!--            *ngIf="formAddNewCustomer.controls.nameCompany.errors?.required && formAddNewCustomer.controls.nameCompany.touched"-->
+          <!--            class="text-danger">Vui lòng nhập tên công ty!!!</p>-->
+
+        </td>
+        <td>
+
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('name').errors?.pattern && customer.get('name').touched">
+            Name sai định dạng !
+          </p>
+          <p class="text-danger"
+             *ngIf="customer.get('name').errors?.required && customer.get('name').touched">
+            Name không để trống!
+          </p>
+          <p class="text-danger"
+             *ngIf="customer.get('name').errors?.minlength && customer.get('name').touched">
+            Name tối thiểu 4 kí tự!
+          </p>
+          <p class="text-danger"
+             *ngIf="customer.get('name').errors?.maxlength && customer.get('name').touched">
+            Name tối đa 30 kí tự!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('idCard').errors?.pattern && customer.get('idCard').touched">
+            Cmnd sai định dạng !
+          </p>
+          <p class="text-danger"
+             *ngIf="customer.get('idCard').errors?.required && customer.get('idCard').touched">
+            Cmnd không để trống!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('email').errors?.email && customer.get('email').touched">
+            Email không đúng định dạng!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('phone').errors?.required && customer.get('phone').touched">
+            Số điện thoại không để trống!
+          </p>
+          <p class="text-danger"
+             *ngIf="customer.get('phone').errors?.pattern && customer.get('phone').touched">
+            Số điện thoại không đúng định dạng!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('birthday').invalid && customer.get('birthday').touched">
+            Ngày sinh không được để trống!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('address').invalid && customer.get('address').touched">
+            Địa chỉ không được để trống!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('website').invalid && customer.get('website').touched">
+            Tên website không để trống!
+          </p>
+        </td>
+        <td>
+          <p class="text-danger"
+             *ngIf="customer.get('nameCompany').invalid && customer.get('nameCompany').touched">
+            Tên công ty không để trống!
+          </p>
+        </td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</ng-container>
+</div>
+<button class="btn btn-success px-4 py-2 mr-2" (click)="addNewArray()" >  <i class="fa fa-plus-square" aria-hidden="true"></i></button>
+
+<button class="btn btn-info px-4 py-2 mr-2 " (click)="addNewCustomer()" *ngIf="checkAdd" [disabled]="formAddNewCustomer.invalid">Lưu</button>
+
+
+
+<!--    pagination-->
+<!--<pagination-controls class="pagination justify-content-center" id="listing_pagination" (pageChange)="page = $event"-->
+<!--                     previousLabel="Trang trước"-->
+<!--                     nextLabel="Trang sau">-->
+
+<!--</pagination-controls>-->
+<nav aria-label="Page navigation example" *ngIf="customers.length!=0 && totalPages>1">
+  <ul class="pagination justify-content-md-center mt-3">
+    <li class="page-item" (click)="onFirst()"><a class="page-link">Trang đầu</a></li>
+    <li class="page-item" (click)="onPrevious()" [ngClass]="pageClicked==0?'disabled':''">
+      <a class="page-link"><<</a>
+    </li>
+    <li class="page-item" *ngFor="let page of pages" (click)="loadData(page)"
+        [ngClass]="pageClicked == page ? 'active' : ''">
+      <a class="page-link" (click)="checkPages(page)">{{page + 1}}</a>
+    </li>
+    <li class="page-item" (click)="onNext()" [ngClass]="pageClicked==totalPages-1?'disabled':''">
+      <a class="page-link">>></a>
+    </li>
+    <li class="page-item" (click)="onLast()"><a class="page-link">Trang cuối</a></li>
+  </ul>
+</nav>
+
+
+
+
+
+
+

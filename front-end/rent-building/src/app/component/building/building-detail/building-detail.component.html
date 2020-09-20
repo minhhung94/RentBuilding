@@ -1,0 +1,105 @@
+
+
+<div class="container" >
+  <form [formGroup]="viewBuildingForm" id="contact" action="" method="post" >
+    <h1>Chi tiết thông tin Tòa Nhà</h1>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Thông tin chung</legend>
+      <!--      Tên viết tắt-->
+      <div class="row">
+        <p class="col-md-3">Tên viết tắt</p>
+        <input class="col-md-5 form-control"  type="text"  formControlName="abbreviationName" disabled>
+      </div>
+      <!--      Tên đầy đủ-->
+      <div class="row">
+        <p class="col-md-3">Tên đầy đủ</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="fullName" disabled>
+      </div>
+      <!--      Mã số thuế-->
+      <div class="row">
+        <p class="col-md-3">Mã số thuế</p>
+        <input class="col-md-5 form-control" type="text" formControlName="taxCode" disabled>
+      </div>
+      <!--      Điện thoại-->
+      <div class="row">
+        <p class="col-md-3">Số điện thoại</p>
+        <input class="col-md-5 form-control" type="text" formControlName="phone" disabled>
+      </div>
+      <!--      Fax-->
+      <div class="row">
+        <p class="col-md-3">Fax</p>
+        <input class="col-md-5 form-control" type="text" formControlName="fax" disabled>
+      </div>
+      <!--      Email-->
+      <div class="row">
+        <p class="col-md-3">Email</p>
+        <input class="col-md-5 form-control" type="text" formControlName="email" disabled>
+      </div>
+      <!--      Địa chỉ-->
+      <div class="row">
+        <p class="col-md-3">Địa chỉ</p>
+        <input class="col-md-5 form-control" type="text" formControlName="address" disabled>
+      </div>
+    </fieldset>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Thông tin trên báo cáo</legend>
+      <!--      Ban quản lý-->
+      <div class="row">
+        <p class="col-md-3">Ban quản lý</p>
+        <input class="col-md-5 form-control" type="text" formControlName="management" disabled>
+      </div>
+      <!--      Người quản lý-->
+      <div class="row">
+        <p class="col-md-3">Người quản lý</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="manager" disabled>
+      </div>
+      <!--      Số tài khoản-->
+      <div class="row">
+        <p class="col-md-3">Số tài khoản</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="accountNumber" disabled>
+      </div>
+      <!--      Tên người nhận-->
+      <div class="row">
+        <p class="col-md-3">Tên người nhận</p>
+        <input class="col-md-5 form-control" type="text" formControlName="recipientName" disabled>
+      </div>
+      <!--      Ngân hàng-->
+      <div class="row">
+        <p class="col-md-3">Ngân hàng</p>
+        <input class="col-md-5 form-control" type="text" tabindex="10" required formControlName="bank" disabled>
+      </div>
+      <div>
+        <input class="col-md-3 form-control" style="margin-top: 5%;margin-left:3%;
+        text-align: center;width: 400%" *ngIf="check1" value="Chưa chọn Logo" disabled>
+        <input  class="col-md-3 form-control" style="margin-top: 5%;margin-left:3%;
+        text-align: center;width: 100%" *ngIf="check2" value="Logo số {{idImage}}" disabled>
+        <div *ngFor="let image of images" class="col-md-3" style="margin-left: 30%;margin-top: 5%">
+          <div *ngIf="image.id==viewBuildingForm.value.logo">
+            <img src="{{image.url}}" style="border-radius: 50%;width: 100% " alt="Logo"/>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <p style="text-align: center;margin-top: 5%" class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Team C0120G1</a>
+    </p>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,169 @@
+<nav class="navbar navbar-expand-md navbar-light ml-auto mb-2 bg-light">
+  <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse " id="myNavbar">
+    <div class="container-fluid">
+      <div class="row">
+        <!--  sidebar  -->
+        <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
+          <a href="#"
+             class="navbar-brand d-block mx-auto text-center text-white py-2 mb-2 bottom-border"><img
+            src="../assets/image/bulding2.png" height="80" width="85"/></a>
+          <ul class="navbar-nav flex-column mt-4 myDIV ">
+            <li  (click)="onClick(1)"   [ngClass]="{'active1': tab==='tab1'}" class="nav-item  sidebar-link ">
+              <a [routerLink]="['/customers']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa fa-users text-light fa-lg mr-3"></i>Danh sách khách hàng</a>
+            </li>
+
+            <li (click)="onClick(2)"   [ngClass]="{'active1': tab==='tab2'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/equipments-building']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa icon-size fa-wrench text-light fa-lg mr-3"></i>Danh sách thiết bị</a>
+            </li>
+
+            <li (click)="onClick(3)"   [ngClass]="{'active1': tab==='tab3'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/contracts/paging']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa icon-size fa-pencil-square-o text-light fa-lg mr-3"></i>Danh sách hợp đồng</a>
+            </li>
+
+            <li  (click)="onClick(4)"   [ngClass]="{'active1': tab==='tab4'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/buildings']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa fa-building icon-size text-light fa-lg mr-3"></i>Danh sách tòa nhà</a>
+            </li>
+
+            <li (click)="onClick(5)"   [ngClass]="{'active1': tab==='tab5'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/floors']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa fa-cubes icon-size text-light fa-lg mr-3"></i>Danh sách tầng</a>
+            </li>
+
+            <li (click)="onClick(6)"   [ngClass]="{'active1': tab==='tab6'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/grounds']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa fa-university icon-size text-light fa-lg mr-3"></i>Danh sách mặt bằng</a>
+            </li>
+
+            <li  (click)="onClick(7)"   [ngClass]="{'active1': tab==='tab7'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/employees']" class="nav-link text-white py-2 mb-2 sidebar-title">
+                <i class="fa fa-desktop  icon-size text-light fa-lg mr-3" aria-hidden="true"></i>Nhân viên văn phòng</a>
+            </li>
+
+            <li  (click)="onClick(8)"   [ngClass]="{'active1': tab==='tab8'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/employees/paging1']" class="nav-link text-white py-2 mb-2 sidebar-title">
+                <i class="fa fa-coffee  icon-size text-light fa-lg mr-3" aria-hidden="true"></i>Nhân viên phục vụ</a>
+            </li>
+
+            <li (click)="onClick(9)"   [ngClass]="{'active1': tab==='tab9'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/services']" class="nav-link text-white py-2 mb-2 sidebar-title">
+                <i class="fa fa-handshake-o icon-size text-light fa-lg mr-3" aria-hidden="true"></i>Danh sách dịch vụ</a>
+            </li>
+
+
+            <li  (click)="onClick(10)"   [ngClass]="{'active1': tab==='tab10'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/reports/search']" class="nav-link text-white py-2 mb-2 sidebar-title"><i
+              class="fa fa-file icon-size text-light fa-lg mr-3 "></i>Báo cáo</a>
+            </li>
+
+            <li  (click)="onClick(11)"   [ngClass]="{'active1': tab==='tab11'}" class="nav-item sidebar-link">
+              <a [routerLink]="['/reports/employee']" class="nav-link text-white py-2 mb-2 sidebar-title">
+                <i class="fa fa-money icon-size text-light fa-lg mr-3 " aria-hidden="true"></i>Lương nhân viên</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!--end of sidebar  -->
+
+        <!-- top-nav-->
+        <div class="col-xl-10 col-lg-9 col-md-8 ml-auto bg-dark fixed-top py-2 top-navbar">
+          <div class="row align-items-center">
+            <div class="col-md-9">
+<!--              <h4 class="text-light text-uppercase mb-0">Rent Building</h4>-->
+              <a class="navbar-brand" href="#"><span style="color: aqua">RENT</span><span style="color: coral">BUILDING</span></a>
+            </div>
+            <div class="col-md-3">
+              <ul class="navbar-nav">
+                <li class="nav-item icon-parent"><a href="" class="nav-link icon-bullet"><i
+                  class="fa fa-comments text-light fa-lg"></i></a></li>
+                <li class="nav-item"><a href="" class="nav-link"><i
+                  class="fa fa-bell text-light fa-lg"></i></a></li>
+                <li class="nav-item"><a [routerLink]="['/login']" class="nav-link"><i
+                  class="fa fa-user text-light fa-lg"></i></a></li>
+                <li class="nav-item ml-md-auto"><a href="" data-toggle="modal" data-target="#sign-out"
+                                                   class="nav-link"><i
+                  class="fa fa-sign-out text-danger fa-lg"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--end of top-nav-->
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!--end of navbar-->
+<!--   modal-->
+<div class="modal fade" id="sign-out">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Want to leave?</h4>
+        <button type="button" class="close" data-dismiss="modal"> &times;</button>
+      </div>
+      <div class="modal-body">
+        Press logout to leave
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Stay here</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end  of  modal-->
+<section>
+  <div class="container-fluid">
+    <div class="row mb-5">
+      <div class="col-xl-10 col-lg-9 col-md-8  ml-auto">
+        <div class="row align-items-center ">
+          <div class="col-12 mb-xl-0">
+
+            <router-outlet></router-outlet>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+        <div class="row border-top pt-3">
+          <div class="col-lg-6 text-center">
+            <ul class="list-inline">
+              <li class="list-inline-item mr-2">
+                <a href="" class="text-dark">CodeAndCreate</a>
+              </li>  <li class="list-inline-item mr-2">
+              <a href="" class="text-dark">About</a>
+            </li>  <li class="list-inline-item mr-2">
+              <a href="" class="text-dark">Support</a>
+            </li>
+              <li class="list-inline-item mr-2">
+                <a href="" class="text-dark">Blog</a>
+              </li>
+
+            </ul>
+
+          </div>
+          <div class="col-lg-6 text-center">
+            <p>&copy; 2020 Copyright . Made with  by <span class="text-success"><i class="fa fa-heart text-danger"></i>TNT<i class="fa fa-heart text-danger"></i></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--footer-->
+

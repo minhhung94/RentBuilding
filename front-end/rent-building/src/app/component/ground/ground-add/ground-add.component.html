@@ -1,0 +1,119 @@
+<div class="container" >
+  <form [formGroup]="addGroundForm" id="contact" action="" method="post"  >
+    <h1>Thêm mới thông tin Mặt Bằng</h1>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Thông tin chung</legend>
+<!--      Tên tòa nhà-->
+      <div class="row">
+        <p class="col-md-3">Tên tòa nhà(<span>*</span>)</p>
+        <select class="col-md-5 form-control"    formControlName="buildingId">
+          <option value="">Chọn</option>
+          <option *ngFor="let building of buildings" [value]="building.id">{{building.fullName}}</option>
+        </select>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('buildingId').hasError('required')
+       && addGroundForm.get('buildingId').valueChanges">Không được để trống !!!
+        </p>
+      </div>
+      <!--      Tên tầng-->
+      <div class="row">
+        <p class="col-md-3">Tên tầng(<span>*</span>)</p>
+        <select class="col-md-5 form-control" formControlName="floorId">
+          <option value="">Chọn</option>
+          <ng-container *ngFor="let floor of floors">
+              <option *ngIf="addGroundForm.value.buildingId==floor.building.id" [value]="floor.id">
+                {{floor.nameFloor}}
+              </option>
+          </ng-container>
+        </select>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('floorId').hasError('required')
+       && addGroundForm.get('floorId').valueChanges">Không được để trống !!!
+        </p>
+      </div>
+      <!--      Loại mặt bằng-->
+      <div class="row">
+        <p class="col-md-3">Loại mặt bằng(<span>*</span>)</p>
+        <select class="col-md-5 form-control"   formControlName="typeGroundId">
+          <option value="">Chọn</option>
+          <option *ngFor="let typeGround of typeGrounds" [value]="typeGround.id">{{typeGround.nameTypeGround}}</option>
+        </select>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('typeGroundId').hasError('required')
+       && addGroundForm.get('typeGroundId').valueChanges">Không được để trống !!!
+        </p>
+      </div>
+      <!--      Mã mặt bằng-->
+      <div class="row">
+        <p class="col-md-3">Mã mặt bằng(<span>*</span>)</p>
+        <input  class="col-md-5 form-control"  type="text" formControlName="codeGround">
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('codeGround').hasError('required')
+       && addGroundForm.get('codeGround').valueChanges">Nhập đúng định dạng:MBxxx !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('codeGround').hasError('pattern')
+       && addGroundForm.get('codeGround').valueChanges">Nhập đúng định dạng:MBxxx !!!
+        </p>
+      </div>
+      <!--      Trạng thái-->
+      <div class="row">
+        <p class="col-md-3">Trạng thái</p>
+        <select class="col-md-5 form-control"  type="text" formControlName="statusGround">
+          <option  value="">Chọn</option>
+          <option  value="Chưa bàn giao">Chưa bàn giao</option>
+          <option value="Đang vào ở">Đang vào ở</option>
+          <option value="Đang sửa chữa">Đang sửa chữa</option>
+        </select>
+      </div>
+      <!--      Diện tích-->
+      <div class="row">
+        <p class="col-md-3">Diện tích(<span>*</span>)</p>
+        <input  class="col-md-5 form-control"  type="text" formControlName="area">
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('area').hasError('required')
+       && addGroundForm.get('area').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('area').hasError('maxlength')
+       && addGroundForm.get('area').valueChanges">Tối đa 25 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addGroundForm.get('area').hasError('pattern')
+       && addGroundForm.get('area').valueChanges">Nhập đúng định dạng !!!
+        </p>
+      </div>
+      <!--      Chú thích-->
+      <div class="row">
+        <p class="col-md-3">Chú thích</p>
+        <textarea rows="5" class="col-md-5 form-control"  type="text" formControlName="note"></textarea>
+      </div>
+      <!--      Giá tiền-->
+      <div class="row">
+        <p class="col-md-3">Giá tiền</p>
+        <input class="col-md-5 form-control"  type="text" formControlName="price">
+      </div>
+      <!--      Phí quản lí-->
+      <div class="row">
+        <p class="col-md-3">Phí quản lí</p>
+        <input class="col-md-5 form-control"  type="text" formControlName="priceManager">
+      </div>
+    </fieldset>
+    <label class="row " style="margin-left: 70%;margin-top: 5%">
+      <button  style="margin-right: 15%" class="btn btn-success mt-3"
+               [disabled]="addGroundForm.invalid" (click)="onAddGround()">
+        Lưu
+      </button>
+      <button class="btn btn-danger mt-3" (click)="clearFilters()">Làm lại</button>
+    </label>
+    <p style="text-align: center;margin-top: 5%" class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Team C0120G1</a>
+    </p>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

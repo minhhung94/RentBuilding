@@ -1,0 +1,193 @@
+
+
+<div class="container" >
+  <form [formGroup]="addBuildingForm" id="contact" action="" method="post" *ngIf=check >
+    <h1>Thêm mới thông tin Tòa Nhà</h1>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Thông tin chung</legend>
+<!--      Tên viết tắt-->
+      <div class="row">
+        <p class="col-md-3">Tên viết tắt</p>
+        <input class="col-md-5 form-control"  type="text"  formControlName="abbreviationName">
+      </div>
+<!--      Tên đầy đủ-->
+      <div class="row">
+        <p class="col-md-3">Tên đầy đủ(<span>*</span>)</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="fullName">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fullName').hasError('required')
+       && addBuildingForm.get('fullName').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fullName').hasError('minlength')
+       && addBuildingForm.get('fullName').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fullName').hasError('maxlength')
+       && addBuildingForm.get('fullName').valueChanges">Tối đa 50 ký tự !!!
+        </p>
+      </div>
+      <!--      Mã số thuế-->
+      <div class="row">
+        <p class="col-md-3">Mã số thuế(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="taxCode">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('taxCode').hasError('required')
+       && addBuildingForm.get('taxCode').valueChanges">Nhập đúng định dạng:MST-xxx !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('taxCode').hasError('pattern')
+       && addBuildingForm.get('taxCode').valueChanges">Nhập đúng định dạng:MST-xxx !!!
+        </p>
+      </div>
+<!--      Điện thoại-->
+      <div class="row">
+        <p class="col-md-3">Số điện thoại(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="phone">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('phone').hasError('required')
+       && addBuildingForm.get('phone').valueChanges">Gồm 9 hoặc 12 số !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('phone').hasError('pattern')
+       && addBuildingForm.get('phone').valueChanges">Gồm 9 hoặc 12 số !!!
+        </p>
+      </div>
+<!--      Fax-->
+      <div class="row">
+        <p class="col-md-3">Fax(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="fax">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fax').hasError('required')
+       && addBuildingForm.get('fax').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fax').hasError('minlength')
+       && addBuildingForm.get('fax').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('fax').hasError('maxlength')
+       && addBuildingForm.get('fax').valueChanges">Tối đa 25 ký tự !!!
+        </p>
+      </div>
+<!--      Email-->
+      <div class="row">
+        <p class="col-md-3">Email(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="email">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('email').hasError('required')
+       && addBuildingForm.get('email').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('email').hasError('email')
+       && addBuildingForm.get('email').valueChanges">Nhập đúng định dạng !!!
+        </p>
+      </div>
+      <!--      Địa chỉ-->
+      <div class="row">
+        <p class="col-md-3">Địa chỉ(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="address">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('address').hasError('required')
+       && addBuildingForm.get('address').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('address').hasError('minlength')
+       && addBuildingForm.get('address').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('address').hasError('maxlength')
+       && addBuildingForm.get('address').valueChanges">Tối đa 50 ký tự !!!
+        </p>
+      </div>
+    </fieldset>
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Thông tin trên báo cáo</legend>
+<!--      Ban quản lý-->
+      <div class="row">
+        <p class="col-md-3">Ban quản lý(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="management">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('management').hasError('required')
+       && addBuildingForm.get('management').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('management').hasError('minlength')
+       && addBuildingForm.get('management').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('management').hasError('maxlength')
+       && addBuildingForm.get('management').valueChanges">Tối đa 50 ký tự !!!
+        </p>
+      </div>
+<!--      Người quản lý-->
+      <div class="row">
+        <p class="col-md-3">Người quản lý(<span>*</span>)</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="manager">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('manager').hasError('required')
+       && addBuildingForm.get('manager').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('manager').hasError('minlength')
+       && addBuildingForm.get('manager').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('manager').hasError('maxlength')
+       && addBuildingForm.get('manager').valueChanges">Tối đa 50 ký tự !!!
+        </p>
+      </div>
+<!--      Số tài khoản-->
+      <div class="row">
+        <p class="col-md-3">Số tài khoản(<span>*</span>)</p>
+        <input  class="col-md-5 form-control" type="text" formControlName="accountNumber">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('accountNumber').hasError('required')
+       && addBuildingForm.get('accountNumber').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('accountNumber').hasError('minlength')
+       && addBuildingForm.get('accountNumber').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('accountNumber').hasError('maxlength')
+       && addBuildingForm.get('accountNumber').valueChanges">Tối đa 25 ký tự !!!
+        </p>
+      </div>
+<!--      Tên người nhận-->
+      <div class="row">
+        <p class="col-md-3">Tên người nhận(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" formControlName="recipientName">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('recipientName').hasError('required')
+       && addBuildingForm.get('recipientName').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('recipientName').hasError('minlength')
+       && addBuildingForm.get('recipientName').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('recipientName').hasError('maxlength')
+       && addBuildingForm.get('recipientName').valueChanges">Tối đa 25 ký tự !!!
+        </p>
+      </div>
+<!--      Ngân hàng-->
+      <div class="row">
+        <p class="col-md-3">Ngân hàng(<span>*</span>)</p>
+        <input class="col-md-5 form-control" type="text" tabindex="10" required formControlName="bank">
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('bank').hasError('required')
+       && addBuildingForm.get('bank').valueChanges">Không được để trống !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('bank').hasError('minlength')
+       && addBuildingForm.get('bank').valueChanges">Tối thiểu 2 ký tự !!!
+        </p>
+        <p class=" text-danger" role="alert" *ngIf="addBuildingForm.get('bank').hasError('maxlength')
+       && addBuildingForm.get('bank').valueChanges">Tối đa 25 ký tự !!!
+        </p>
+      </div>
+      <div>
+        <button class="col-md-3" id="clickSelect" (click)="showPickImage()" style="background: linear-gradient(orangered,darkviolet)">Chọn Logo </button>
+        <input  class="col-md-3 form-control" style="margin-top: 5%;margin-left:3%;text-align: center;width: 100px" *ngIf=check1 value="Logo số {{idImage}}" disabled>
+        <div *ngIf=check2>
+          <img [src]="urlImage" style="border-radius: 50%;width: 40%;margin-left: 30%;margin-top: 4% " alt="Logo"/>
+        </div>
+      </div>
+    </fieldset>
+
+    <label class="row " style="margin-left: 70%;margin-top: 5%">
+      <button style="margin-right: 15%"  class="btn btn-success mt-3"
+              [disabled]="addBuildingForm.invalid" (click)="onAddBuilding()">
+        Lưu
+      </button>
+      <button class="btn btn-danger mt-3" (click)="clearFilters()">
+        Làm lại
+      </button>
+    </label>
+    <p style="text-align: center;margin-top: 5%" class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Team C0120G1</a>
+    </p>
+  </form>
+  <div class="gallery-container" *ngIf=!check id="formSelectImage" style="text-align: center;border: black 5px double;background: #470688">
+    <h2 style="color: red;text-align: center;margin-top:5%;margin-bottom: 10%">Nhấp vào ảnh muốn chọn</h2>
+    <div class="gallery-item row" *ngFor="let image of images">
+      <div><img src="{{image.url}}" (click)="pickImage($event.target.src, image.id)" style="width: 50%"></div>
+
+    </div>
+    <button class="btn btn-danger" (click)="cancelSelectImage()">Hủy chọn Logo</button>
+  </div>
+</div>
+
+
+
