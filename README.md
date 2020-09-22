@@ -1,14 +1,19 @@
 # RentBuilding
-                              Trang Danh Sách Khách Hàng
-![rent1](https://user-images.githubusercontent.com/59548604/93740281-60b15000-fc14-11ea-883e-ab28294e06c8.png)
+                              Trang Danh Sách Thiết Bị Của Toà Nhà
+![rent11](https://user-images.githubusercontent.com/59548604/93839933-c6efae80-fcb8-11ea-9c25-cb964530005a.png)
 
-                              Trang Thiết Bị Của Mặt Bằng
+                              Trang Danh Sách Thiết Bị Của Mặt Bằng
 ![rent2](https://user-images.githubusercontent.com/59548604/93740399-96eecf80-fc14-11ea-869a-69dfb82b625c.png)
 
-				Trang Danh Sách Hợp Đồng
-![rent3](https://user-images.githubusercontent.com/59548604/93743032-6fe6cc80-fc19-11ea-8bfd-62819f3b5d4b.png)
+				Trang Danh Sách Dịch Vụ
+![rent9](https://user-images.githubusercontent.com/59548604/93839337-dbcb4280-fcb6-11ea-9710-1dd0a7776732.png)
 
-				Trang Danh Toà Nhà
-![rent4](https://user-images.githubusercontent.com/59548604/93743106-9c024d80-fc19-11ea-8e7f-6b8cbc4b05ed.png)
+				Trang Dịch Vụ Của Một Khách Hàng
+![rent12](https://user-images.githubusercontent.com/59548604/93840000-061dff80-fcb9-11ea-8ee3-556d5b1b4ae0.png)
+
+				Trang Hoá Đơn Của Một Khách Hàng
+![rent13](https://user-images.githubusercontent.com/59548604/93840026-2057dd80-fcb9-11ea-977c-ad7d5cc25e1f.png)
+
+
 
 
